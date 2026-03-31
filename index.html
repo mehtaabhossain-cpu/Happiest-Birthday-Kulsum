@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 💕</title>
+  <meta name="description" content="A special birthday surprise just for you!">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ✨ Floating Hearts Background ✨ -->
+  <div class="floating-hearts"></div>
+
+  <!-- ========================================
+       PAGE 1: Matrix Rain + Countdown + Cake GIF
+       ======================================== -->
+  <section id="page1" class="page active">
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Countdown Overlay -->
+    <div class="countdown-overlay">
+      <span class="countdown-number">3</span>
+    </div>
+
+    <!-- Cake GIF -->
+    <div class="cake-gif-container">
+      <iframe src="https://giphy.com/embed/He4wudo59enf2" 
+              width="360" height="300" 
+              frameBorder="0" 
+              allowFullScreen>
+      </iframe>
+      <button class="btn skip-btn" onclick="skipCakeGif()">Continue →</button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 2: Something Special + Yes/No
+       ======================================== -->
+  <section id="page2" class="page">
+    <div class="card">
+      <h1 id="typeText2" class="typewriter-text"></h1>
+
+      <div class="giphy-embed">
+        <iframe src="https://giphy.com/embed/BdAn5S0xigpO" 
+                allowFullScreen>
+        </iframe>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-yes" onclick="nextPage()">Yes 💝</button>
+        <button class="btn btn-no" onclick="showNoModal()">No 😅</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- No Modal Popup -->
+  <div id="noModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Why did you click No? 😤</h2>
+
+      <div class="giphy-embed">
+        <iframe src="https://giphy.com/embed/3ohzdYJK1lnOykVLji" 
+                allowFullScreen>
+        </iframe>
+      </div>
+
+      <button class="btn btn-try-again" onclick="closeNoModal()">Try Again 🔄</button>
+    </div>
+  </div>
+
+  <!-- ========================================
+       PAGE 3: Happy Birthday
+       ======================================== -->
+  <section id="page3" class="page">
+    <div class="card">
+      <h1 id="typeText3" class="typewriter-text"></h1>
+
+      <div class="giphy-embed">
+        <iframe src="https://giphy.com/embed/g5R9dok94mrIvplmZd" 
+                allowFullScreen>
+        </iframe>
+      </div>
+
+      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 4: My Wish (Letter Card)
+       ======================================== -->
+  <section id="page4" class="page">
+    <div class="card">
+      <h1 id="typeText4" class="typewriter-text"></h1>
+
+      <div class="letter-container">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        
+        <p class="letter-text">
+          On this special day, I wish you all the happiness your heart can hold. 
+          May your days be filled with sunshine, your nights with sweet dreams, 
+          and your life with all the love you truly deserve.
+          <br><br>
+          May every moment bring you closer to your dreams, 
+          and may you always know how incredibly special you are to me. 
+          You make this world a more beautiful place just by being in it.
+          <br><br>
+          Here's to another year of laughter, love, and making unforgettable memories together. 💕
+        </p>
+        <p class="letter-signature">With all my love ♥</p>
+      </div>
+
+      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 5: Virtual Hug
+       ======================================== -->
+  <section id="page5" class="page">
+    <div class="card">
+      <h1 id="typeText5" class="typewriter-text"></h1>
+
+      <div class="giphy-embed">
+        <iframe src="https://giphy.com/embed/ZBQhoZC0nqknSviPqT" 
+                allowFullScreen>
+        </iframe>
+      </div>
+
+      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 6: Will You Be Mine? (Heart Frames)
+       ======================================== -->
+  <section id="page6" class="page">
+    <div class="card">
+      <h1 id="typeText6" class="typewriter-text"></h1>
+
+      <div class="hearts-grid">
+        <div class="heart-frame" style="opacity:0; transform:scale(0.5)">
+          <img src="images/photo1.png" alt="Us together">
+        </div>
+        <div class="heart-frame" style="opacity:0; transform:scale(0.5)">
+          <img src="images/photo2.png" alt="Our memories">
+        </div>
+        <div class="heart-frame" style="opacity:0; transform:scale(0.5)">
+          <img src="images/photo3.png" alt="Together forever">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

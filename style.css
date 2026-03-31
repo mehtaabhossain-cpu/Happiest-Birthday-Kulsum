@@ -1,0 +1,581 @@
+/* ============================================
+   HAPPY BIRTHDAY - COMPLETE STYLES
+   Theme: Light Pink & White (Romantic)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --pink-light: #FFD6E0;
+  --pink: #FFB6C1;
+  --pink-medium: #FF91A4;
+  --pink-deep: #FF6B8A;
+  --pink-hot: #FF4081;
+  --white: #FFFFFF;
+  --white-soft: #FFF5F7;
+  --bg-gradient: linear-gradient(135deg, #FFF0F3 0%, #FFD6E0 50%, #FFEEF2 100%);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --shadow-soft: 0 8px 32px rgba(255, 107, 138, 0.15);
+  --shadow-hover: 0 12px 48px rgba(255, 107, 138, 0.25);
+  --font-title: 'Dancing Script', cursive;
+  --font-body: 'Poppins', sans-serif;
+  --font-letter: 'Great Vibes', cursive;
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: var(--bg-gradient);
+  color: #4A2040;
+}
+
+/* ---------- Page Container ---------- */
+.page {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  z-index: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.page.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  border-radius: 24px;
+  padding: 40px 36px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ---------- Typewriter ---------- */
+.typewriter-text {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--pink-deep);
+  min-height: 3rem;
+  display: inline-block;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background-color: var(--pink-hot);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursorBlink 0.7s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---------- Page 1: Matrix Rain ---------- */
+#page1 {
+  background: #0a0a0a;
+  padding: 0;
+}
+
+#matrixCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.countdown-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.countdown-number {
+  font-family: var(--font-title);
+  font-size: 10rem;
+  font-weight: 700;
+  color: var(--pink-hot);
+  text-shadow: 
+    0 0 20px rgba(255, 64, 129, 0.8),
+    0 0 40px rgba(255, 64, 129, 0.5),
+    0 0 80px rgba(255, 64, 129, 0.3);
+  animation: countdownPulse 1s ease-in-out;
+}
+
+@keyframes countdownPulse {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.cake-gif-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.cake-gif-container.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cake-gif-container iframe {
+  border-radius: 16px;
+  border: 3px solid var(--pink);
+  box-shadow: 0 0 30px rgba(255, 64, 129, 0.4);
+}
+
+.cake-gif-container .skip-btn {
+  margin-top: 24px;
+}
+
+/* ---------- Page 2: Something Special ---------- */
+#page2 .card {
+  padding: 36px 30px;
+}
+
+.giphy-embed {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 20px auto;
+  border: 2px solid rgba(255, 182, 193, 0.4);
+  box-shadow: 0 4px 20px rgba(255, 107, 138, 0.15);
+}
+
+.giphy-embed iframe {
+  width: 100%;
+  height: 240px;
+  border: none;
+  display: block;
+}
+
+.btn-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, var(--pink-hot), var(--pink-deep));
+  color: white;
+  box-shadow: 0 4px 20px rgba(255, 64, 129, 0.35);
+}
+
+.btn-yes:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(255, 64, 129, 0.5);
+}
+
+.btn-no {
+  background: var(--white);
+  color: var(--pink-deep);
+  border: 2px solid var(--pink);
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.2);
+}
+
+.btn-no:hover {
+  transform: translateY(-3px);
+  background: var(--pink-light);
+}
+
+.btn-next {
+  background: linear-gradient(135deg, var(--pink-hot), var(--pink-deep));
+  color: white;
+  box-shadow: 0 4px 20px rgba(255, 64, 129, 0.35);
+  margin-top: 24px;
+}
+
+.btn-next:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(255, 64, 129, 0.5);
+}
+
+.skip-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 10px 28px;
+  font-size: 0.9rem;
+}
+
+.skip-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ---------- Modal (No popup) ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 20px;
+}
+
+.modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 24px;
+  padding: 36px 30px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  transform: scale(0.8);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.visible .modal-content {
+  transform: scale(1);
+}
+
+.modal-content h2 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--pink-deep);
+  margin-bottom: 16px;
+}
+
+.modal-content .giphy-embed {
+  margin: 16px auto;
+}
+
+.btn-try-again {
+  background: linear-gradient(135deg, var(--pink-hot), var(--pink-deep));
+  color: white;
+  box-shadow: 0 4px 20px rgba(255, 64, 129, 0.35);
+  margin-top: 16px;
+}
+
+.btn-try-again:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(255, 64, 129, 0.5);
+}
+
+/* ---------- Page 3: Happy Birthday ---------- */
+#page3 .card {
+  overflow: hidden;
+}
+
+/* ---------- Page 4: Letter Card ---------- */
+.letter-container {
+  background: var(--white-soft);
+  border: 2px solid var(--pink);
+  border-radius: 20px;
+  padding: 36px 32px;
+  margin: 24px auto;
+  max-width: 460px;
+  position: relative;
+  box-shadow: 
+    0 4px 20px rgba(255, 182, 193, 0.2),
+    inset 0 0 40px rgba(255, 214, 224, 0.3);
+}
+
+.letter-container::before {
+  content: '💌';
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  background: white;
+  padding: 0 12px;
+}
+
+.letter-container::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(255, 145, 164, 0.4);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+.letter-text {
+  font-family: var(--font-letter);
+  font-size: 1.35rem;
+  line-height: 1.9;
+  color: #5A2D48;
+  text-align: left;
+}
+
+.letter-signature {
+  font-family: var(--font-letter);
+  font-size: 1.5rem;
+  color: var(--pink-hot);
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* decorative corner curls */
+.letter-container .corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--pink);
+  opacity: 0.5;
+}
+.letter-container .corner.tl { top: 10px; left: 10px; border-right: none; border-bottom: none; border-radius: 12px 0 0 0; }
+.letter-container .corner.tr { top: 10px; right: 10px; border-left: none; border-bottom: none; border-radius: 0 12px 0 0; }
+.letter-container .corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; border-radius: 0 0 0 12px; }
+.letter-container .corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; border-radius: 0 0 12px 0; }
+
+/* ---------- Page 6: Heart Frames ---------- */
+.hearts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.heart-frame {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  animation: heartPulse 2s ease-in-out infinite;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.heart-frame:nth-child(2) { animation-delay: 0.3s; }
+.heart-frame:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.heart-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: path('M90 170 C90 170 10 120 10 65 C10 30 40 10 65 10 C78 10 88 18 90 28 C92 18 102 10 115 10 C140 10 170 30 170 65 C170 120 90 170 90 170Z');
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+
+.heart-frame:hover img {
+  transform: scale(1.05);
+}
+
+/* heart border decoration */
+.heart-frame::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  clip-path: path('M94 178 C94 178 10 126 10 67 C10 30 42 8 68 8 C82 8 92 17 94 28 C96 17 106 8 120 8 C146 8 178 30 178 67 C178 126 94 178 94 178Z');
+  background: linear-gradient(135deg, var(--pink-hot), var(--pink));
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* ---------- Floating hearts background ---------- */
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.15;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.15; }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- Sparkle particles ---------- */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--pink-hot);
+  border-radius: 50%;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .card {
+    padding: 28px 20px;
+    border-radius: 18px;
+  }
+
+  .typewriter-text {
+    font-size: 1.6rem;
+  }
+
+  .countdown-number {
+    font-size: 6rem;
+  }
+
+  .heart-frame {
+    width: 140px;
+    height: 140px;
+  }
+
+  .heart-frame img {
+    clip-path: path('M70 132 C70 132 8 94 8 50 C8 24 30 8 50 8 C60 8 68 14 70 22 C72 14 80 8 90 8 C110 8 132 24 132 50 C132 94 70 132 70 132Z');
+  }
+
+  .heart-frame::before {
+    clip-path: path('M74 140 C74 140 8 98 8 52 C8 24 32 6 54 6 C64 6 72 13 74 22 C76 13 84 6 94 6 C114 6 140 24 140 52 C140 98 74 140 74 140Z');
+  }
+
+  .letter-container {
+    padding: 28px 20px;
+  }
+
+  .letter-text {
+    font-size: 1.15rem;
+  }
+
+  .giphy-embed iframe {
+    height: 200px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .typewriter-text {
+    font-size: 1.3rem;
+  }
+
+  .heart-frame {
+    width: 120px;
+    height: 120px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+}
