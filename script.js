@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ======================
   // TYPEWRITER EFFECT
   // ======================
-  function typeWriter(elementId, text, speed = 70, callback) {
+  function typeWriter(elementId, text, speed = 60, callback) {
     const el = document.getElementById(elementId);
     if (!el) return;
     el.innerHTML = '';
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter('typeText2', 'I made something special for you, wanna see? 💝', 60);
         break;
       case 3:
-        typeWriter('typeText3', 'Happy Birthday to you, Kulsum', 80);
+        typeWriter('typeText3', 'Happy Birthday to you, Kulsum ❤️', 80);
         startFireworks();
         break;
       case 4:
