@@ -351,12 +351,277 @@ html, body {
   box-shadow: 0 8px 30px rgba(255, 64, 129, 0.5);
 }
 
-/* ---------- Page 3: Happy Birthday ---------- */
-#page3 .card {
+/* ---------- Page 3: Fireworks ---------- */
+#page3 {
+  background: radial-gradient(circle at center, #19071a 0%, #09030d 100%);
+}
+
+#page3 .fireworks-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#page3 .fireworks-card {
+  position: relative;
+  z-index: 2;
+}
+
+#page3 .fireworks-subtext {
+  margin-top: 12px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  text-shadow: 0 0 8px rgba(255, 64, 129, 0.4);
+}
+
+/* ---------- Page 4: Cake Cutting ---------- */
+.cake-instruction {
+  margin-top: 10px;
+  color: #7a3a5f;
+  font-weight: 500;
+}
+
+.cake-cutting {
+  width: 220px;
+  height: 220px;
+  margin: 24px auto 8px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.cake-cutting:hover {
+  transform: scale(1.03);
+}
+
+.cake-bottom, .cake-mid, .cake-top {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 14px;
+  transition: all 0.6s ease;
+}
+
+.cake-bottom {
+  bottom: 30px;
+  width: 180px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff9db8, #ff6f96);
+}
+
+.cake-mid {
+  bottom: 82px;
+  width: 150px;
+  height: 45px;
+  background: linear-gradient(135deg, #ffd5a6, #ffc27d);
+}
+
+.cake-top {
+  bottom: 120px;
+  width: 120px;
+  height: 34px;
+  background: linear-gradient(135deg, #fff7e8, #ffe8cc);
+}
+
+.cake-candle {
+  position: absolute;
+  left: 50%;
+  bottom: 154px;
+  width: 10px;
+  height: 28px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #fff, #ffd9ef);
+  border-radius: 6px;
+}
+
+.cake-flame {
+  position: absolute;
+  left: 50%;
+  bottom: 182px;
+  width: 14px;
+  height: 20px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 50% 70%, #ff9f1c, #ff5d00);
+  border-radius: 50% 50% 50% 50%;
+  animation: flicker 0.8s ease-in-out infinite;
+}
+
+.cake-slice {
+  position: absolute;
+  right: 34px;
+  bottom: 52px;
+  width: 46px;
+  height: 78px;
+  background: linear-gradient(135deg, #ffe7c7, #ffb2cb);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateX(0) rotate(0deg);
+  transition: all 0.7s ease;
+}
+
+@keyframes flicker {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(0.85); }
+}
+
+.cake-cutting.cut .cake-top {
+  transform: translateX(-72%);
+}
+
+.cake-cutting.cut .cake-mid {
+  transform: translateX(-58%);
+}
+
+.cake-cutting.cut .cake-slice {
+  opacity: 1;
+  transform: translateX(26px) rotate(10deg);
+}
+
+.cake-message {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.4s ease;
+  color: #b64074;
+  font-weight: 600;
+}
+
+.cake-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Page 5: Greeting Card ---------- */
+.greeting-card {
+  width: 100%;
+  max-width: 420px;
+  height: 280px;
+  margin: 24px auto 8px;
+  perspective: 1200px;
+  position: relative;
+  cursor: pointer;
+}
+
+.greeting-card .card-front,
+.greeting-card .card-inside {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Front cover --- */
+.greeting-card .card-front {
+  background: linear-gradient(135deg, #ff7ca6 0%, #ff4f86 50%, #e8376d 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-family: var(--font-title);
+  font-weight: 700;
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 26px 24px;
   overflow: hidden;
 }
 
-/* ---------- Page 4: Letter Card ---------- */
+.greeting-card .card-front::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.greeting-card .card-front::after {
+  content: '💌';
+  font-size: 3rem;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+  animation: envelopeBounce 2s ease-in-out infinite;
+}
+
+@keyframes envelopeBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.08); }
+}
+
+/* --- Inside panel --- */
+.greeting-card .card-inside {
+  background: linear-gradient(160deg, #fff9fb 0%, #ffe8f0 40%, #ffd6e4 100%);
+  border: 2px solid rgba(255, 182, 210, 0.5);
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.greeting-card .card-inside::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(255, 145, 170, 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.greeting-card .card-inside p {
+  font-family: var(--font-letter);
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #6b2a4a;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+}
+
+.greeting-card .card-inside .greeting-hearts {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.5s ease 0.9s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s;
+}
+
+/* --- Open state --- */
+.greeting-card.open .card-front {
+  transform: rotateY(-160deg);
+  box-shadow: -4px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.greeting-card.open .card-inside p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.greeting-card.open .card-inside .greeting-hearts {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Page 6: Happy Birthday ---------- */
+#page6 .card {
+  /* overflow: hidden; */
+  overflow: auto;
+}
+
+/* ---------- Page 7: Letter Card ---------- */
 .letter-container {
   background: var(--white-soft);
   border: 2px solid var(--pink);
@@ -419,7 +684,7 @@ html, body {
 .letter-container .corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; border-radius: 0 0 0 12px; }
 .letter-container .corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; border-radius: 0 0 12px 0; }
 
-/* ---------- Page 6: Heart Frames ---------- */
+/* ---------- Page 9: Heart Frames ---------- */
 .hearts-grid {
   display: flex;
   flex-wrap: wrap;
@@ -577,5 +842,98 @@ html, body {
   .btn-group {
     flex-direction: column;
     align-items: center;
+  }
+
+  .greeting-card {
+    height: 220px;
+  }
+
+  .greeting-card .card-inside p {
+    font-size: 1rem;
+  }
+}
+
+/* ---------- Music Toggle Button ---------- */
+.music-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 16px rgba(255, 64, 129, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+
+.music-toggle:hover {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 6px 24px rgba(255, 64, 129, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.music-toggle:active {
+  transform: scale(0.95);
+}
+
+.music-toggle .music-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.music-toggle.playing .music-icon {
+  animation: musicPulse 1.2s ease-in-out infinite;
+}
+
+/* Webkit */
+.card::-webkit-scrollbar {
+  height: 10px;
+  margin-right: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: rgba(255, 64, 129, 0.35);
+  border-radius: 10px;  
+}
+
+.card::-webkit-scrollbar-track {
+  margin: 100px 0; /* leaves space on both sides */
+  background: transparent;
+}
+
+.gifs {
+  border-radius: 20px;
+}
+
+@keyframes musicPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@media (max-width: 600px) {
+  .music-toggle {
+    width: 42px;
+    height: 42px;
+    bottom: 14px;
+    right: 14px;
+  }
+
+  .music-toggle .music-icon {
+    font-size: 1.2rem;
   }
 }

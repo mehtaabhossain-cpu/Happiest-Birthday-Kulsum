@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <meta name="description" content="A special birthday surprise just for you!">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- ✨ Floating Hearts Background ✨ -->
@@ -25,11 +27,9 @@
 
     <!-- Cake GIF -->
     <div class="cake-gif-container">
-      <iframe src="https://giphy.com/embed/He4wudo59enf2" 
-              width="360" height="300" 
-              frameBorder="0" 
-              allowFullScreen>
-      </iframe>
+      <!-- <iframe src="https://giphy.com/embed/He4wudo59enf2" width="360" height="300" frameBorder="0" allowFullScreen>
+      </iframe> -->
+      <img class="gifs" src="gifs/cake-cutting.gif" width="360" height="300" alt="gif">
       <button class="btn skip-btn" onclick="skipCakeGif()">Continue →</button>
     </div>
   </section>
@@ -41,71 +41,108 @@
     <div class="card">
       <h1 id="typeText2" class="typewriter-text"></h1>
 
-      <div class="giphy-embed">
+      <!-- <div class="giphy-embed">
         <iframe src="https://giphy.com/embed/BdAn5S0xigpO" 
                 allowFullScreen>
         </iframe>
-      </div>
+      </div> -->
 
       <div class="btn-group">
         <button class="btn btn-yes" onclick="nextPage()">Yes 💝</button>
-        <button class="btn btn-no" onclick="showNoModal()">No 😅</button>
+        <!-- <button class="btn btn-no" onclick="showNoModal()">No 😅</button> -->
       </div>
     </div>
   </section>
 
   <!-- No Modal Popup -->
-  <div id="noModal" class="modal-overlay">
+  <!-- <div id="noModal" class="modal-overlay">
     <div class="modal-content">
       <h2>Why did you click No? 😤</h2>
 
       <div class="giphy-embed">
-        <iframe src="https://giphy.com/embed/3ohzdYJK1lnOykVLji" 
-                allowFullScreen>
+        <iframe src="https://giphy.com/embed/3ohzdYJK1lnOykVLji" allowFullScreen>
         </iframe>
       </div>
 
       <button class="btn btn-try-again" onclick="closeNoModal()">Try Again 🔄</button>
     </div>
-  </div>
+  </div> -->
 
   <!-- ========================================
-       PAGE 3: Happy Birthday
+       PAGE 3: Fireworks + Birthday Popup
        ======================================== -->
   <section id="page3" class="page">
-    <div class="card">
+    <canvas id="fireworksCanvas" class="fireworks-bg"></canvas>
+    <div class="card fireworks-card">
       <h1 id="typeText3" class="typewriter-text"></h1>
-
-      <div class="giphy-embed">
-        <iframe src="https://giphy.com/embed/g5R9dok94mrIvplmZd" 
-                allowFullScreen>
-        </iframe>
-      </div>
-
+      <p class="fireworks-subtext">A little surprise just for Kulsum ✨</p>
       <button class="btn btn-next" onclick="nextPage()">Next →</button>
     </div>
   </section>
 
   <!-- ========================================
-       PAGE 4: My Wish (Letter Card)
+       PAGE 4: Cake Cutting
        ======================================== -->
   <section id="page4" class="page">
     <div class="card">
       <h1 id="typeText4" class="typewriter-text"></h1>
+      <p class="cake-instruction">Click the cake to cut it 🎂</p>
+      <div id="cakeCutting" class="cake-cutting">
+        <div class="cake-top"></div>
+        <div class="cake-mid"></div>
+        <div class="cake-bottom"></div>
+        <div class="cake-candle"></div>
+        <div class="cake-flame"></div>
+        <div class="cake-slice"></div>
+      </div>
+      <p id="cakeMessage" class="cake-message">Yay! Cake is cut. Make a wish! 🎉</p>
+      <button id="cakeNextBtn" class="btn btn-next hidden-btn" onclick="nextPage()">Next →</button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 5: Greeting Card
+       ======================================== -->
+  <section id="page5" class="page">
+    <div class="card">
+      <h1 id="typeText5" class="typewriter-text"></h1>
+      <div id="greetingCard" class="greeting-card">
+        <div class="card-front">
+          <p>Click to Open</p>
+        </div>
+        <div class="card-inside">
+          <p>
+            Dear Madam Ji, Happy Birthday!! 🎂<br>
+            I hope your day is filled with lots of love and laughs!
+            May all your birthday wishes come true. ✨
+          </p>
+          <span class="greeting-hearts">💕 💖 💕</span>
+        </div>
+      </div>
+      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 6: My Wish (Letter Card)
+       ======================================== -->
+  <section id="page6" class="page">
+    <div class="card">
+      <h1 id="typeText6" class="typewriter-text"></h1>
 
       <div class="letter-container">
         <div class="corner tl"></div>
         <div class="corner tr"></div>
         <div class="corner bl"></div>
         <div class="corner br"></div>
-        
+
         <p class="letter-text">
-          On this special day, I wish you all the happiness your heart can hold. 
-          May your days be filled with sunshine, your nights with sweet dreams, 
+          On this special day, I wish you all the happiness your heart can hold.
+          May your days be filled with sunshine, your nights with sweet dreams,
           and your life with all the love you truly deserve.
           <br><br>
-          May every moment bring you closer to your dreams, 
-          and may you always know how incredibly special you are to me. 
+          May every moment bring you closer to your dreams,
+          and may you always know how incredibly special you are to me.
           You make this world a more beautiful place just by being in it.
           <br><br>
           Here's to another year of laughter, love, and making unforgettable memories together. 💕
@@ -118,28 +155,28 @@
   </section>
 
   <!-- ========================================
-       PAGE 5: Virtual Hug
+       PAGE 7: Virtual Hug
        ======================================== -->
-  <section id="page5" class="page">
+  <section id="page7" class="page">
     <div class="card">
-      <h1 id="typeText5" class="typewriter-text"></h1>
+      <h1 id="typeText7" class="typewriter-text"></h1>
 
       <div class="giphy-embed">
-        <iframe src="https://giphy.com/embed/ZBQhoZC0nqknSviPqT" 
-                allowFullScreen>
-        </iframe>
+        <!-- <iframe src="https://giphy.com/embed/ZBQhoZC0nqknSviPqT" allowFullScreen>
+        </iframe> -->
+        <img class="gifs" src="gifs/virtual-hug.gif" alt="gif">
       </div>
 
-      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      <button class="btn btn-next" onclick="window.location.reload()">Repeat Again →</button>
     </div>
   </section>
 
   <!-- ========================================
-       PAGE 6: Will You Be Mine? (Heart Frames)
+       PAGE 8: Will You Be Mine? (Heart Frames)
        ======================================== -->
-  <section id="page6" class="page">
+  <!-- <section id="page8" class="page">
     <div class="card">
-      <h1 id="typeText6" class="typewriter-text"></h1>
+      <h1 id="typeText8" class="typewriter-text"></h1>
 
       <div class="hearts-grid">
         <div class="heart-frame" style="opacity:0; transform:scale(0.5)">
@@ -153,8 +190,19 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Music Toggle Button -->
+  <button id="musicToggle" class="music-toggle" aria-label="Toggle music">
+    <span class="music-icon">🔇</span>
+  </button>
 
   <script src="script.js"></script>
 </body>
+
 </html>

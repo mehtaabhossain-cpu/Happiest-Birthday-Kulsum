@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ---------- State ----------
   let currentPage = 1;
-  const totalPages = 6;
+  const totalPages = 8;
 
   // ---------- Elements ----------
   const pages = document.querySelectorAll('.page');
@@ -15,6 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const countdownNumber = document.querySelector('.countdown-number');
   const cakeGifContainer = document.querySelector('.cake-gif-container');
   const modalOverlay = document.getElementById('noModal');
+  const fireworksCanvas = document.getElementById('fireworksCanvas');
+  const cakeCutting = document.getElementById('cakeCutting');
+  const cakeMessage = document.getElementById('cakeMessage');
+  const cakeNextBtn = document.getElementById('cakeNextBtn');
+  const greetingCard = document.getElementById('greetingCard');
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  const musicIcon = musicToggle ? musicToggle.querySelector('.music-icon') : null;
+  let fireworksRunning = false;
+  let fireworksAnimId = null;
 
   // ---------- Floating Hearts Background ----------
   function createFloatingHearts() {
@@ -32,6 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   createFloatingHearts();
+
+  // ======================
+  // MUSIC TOGGLE
+  // ======================
+  let musicPlaying = false;
+
+  if (musicToggle && bgMusic) {
+    musicToggle.addEventListener('click', () => {
+      if (musicPlaying) {
+        bgMusic.pause();
+        musicPlaying = false;
+        musicToggle.classList.remove('playing');
+        musicIcon.textContent = '🔇';
+      } else {
+        bgMusic.play().then(() => {
+          musicPlaying = true;
+          musicToggle.classList.add('playing');
+          musicIcon.textContent = '🔊';
+        }).catch(() => {
+          // autoplay blocked – nothing we can do until next interaction
+        });
+      }
+    });
+  }
 
   // ======================
   // MATRIX RAIN (Page 1)
@@ -122,8 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
       matrixCanvas.height = window.innerHeight;
     });
 
-    // Start countdown after 4 seconds
-    setTimeout(() => startCountdown(), 4000);
+    // Start countdown after 1 seconds
+    setTimeout(() => startCountdown(), 1000);
   }
 
   // ---------- Countdown 3-2-1 ----------
@@ -192,13 +226,212 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ======================
-  // PAGE NAVIGATION
+  // CANVAS FIREWORKS (Page 3)
   // ======================
+  const fwParticles = [];
+  const fwRockets = [];
+  let fwCtx = null;
+
+  function initFireworksCanvas() {
+    if (!fireworksCanvas) return;
+    fwCtx = fireworksCanvas.getContext('2d');
+    resizeFireworksCanvas();
+    window.addEventListener('resize', resizeFireworksCanvas);
+  }
+
+  function resizeFireworksCanvas() {
+    if (!fireworksCanvas) return;
+    fireworksCanvas.width = window.innerWidth;
+    fireworksCanvas.height = window.innerHeight;
+  }
+
+  function launchRocket() {
+    if (!fwCtx) return;
+    const x = Math.random() * fireworksCanvas.width;
+    const targetY = fireworksCanvas.height * (0.15 + Math.random() * 0.35);
+    fwRockets.push({
+      x: x,
+      y: fireworksCanvas.height,
+      targetY: targetY,
+      speed: 4 + Math.random() * 3,
+      hue: Math.floor(Math.random() * 360),
+      trail: []
+    });
+  }
+
+  function explodeRocket(rocket) {
+    const count = 30 + Math.floor(Math.random() * 30);
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.3;
+      const speed = 1.5 + Math.random() * 4;
+      const hueVariation = rocket.hue + Math.floor(Math.random() * 60 - 30);
+      fwParticles.push({
+        x: rocket.x,
+        y: rocket.y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1.0,
+        decay: 0.008 + Math.random() * 0.012,
+        hue: hueVariation,
+        size: 1.5 + Math.random() * 2.5,
+        trail: []
+      });
+    }
+
+    // Inner ring with different hue
+    const innerCount = 12 + Math.floor(Math.random() * 8);
+    const innerHue = (rocket.hue + 180) % 360;
+    for (let i = 0; i < innerCount; i++) {
+      const angle = (Math.PI * 2 / innerCount) * i;
+      const speed = 0.8 + Math.random() * 1.5;
+      fwParticles.push({
+        x: rocket.x,
+        y: rocket.y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1.0,
+        decay: 0.012 + Math.random() * 0.008,
+        hue: innerHue,
+        size: 1 + Math.random() * 1.5,
+        trail: []
+      });
+    }
+  }
+
+  function animateFireworks() {
+    if (!fireworksRunning || !fwCtx) return;
+
+    // Fade with translucent fill
+    fwCtx.fillStyle = 'rgba(9, 3, 13, 0.15)';
+    fwCtx.fillRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+
+    // Update & draw rockets
+    for (let i = fwRockets.length - 1; i >= 0; i--) {
+      const r = fwRockets[i];
+      r.trail.push({ x: r.x, y: r.y });
+      if (r.trail.length > 8) r.trail.shift();
+
+      r.y -= r.speed;
+
+      // Draw rocket trail
+      for (let t = 0; t < r.trail.length; t++) {
+        const alpha = (t / r.trail.length) * 0.6;
+        fwCtx.beginPath();
+        fwCtx.arc(r.trail[t].x, r.trail[t].y, 2, 0, Math.PI * 2);
+        fwCtx.fillStyle = `hsla(${r.hue}, 100%, 70%, ${alpha})`;
+        fwCtx.fill();
+      }
+
+      // Draw rocket head
+      fwCtx.beginPath();
+      fwCtx.arc(r.x, r.y, 3, 0, Math.PI * 2);
+      fwCtx.fillStyle = `hsl(${r.hue}, 100%, 85%)`;
+      fwCtx.shadowColor = `hsl(${r.hue}, 100%, 70%)`;
+      fwCtx.shadowBlur = 12;
+      fwCtx.fill();
+      fwCtx.shadowBlur = 0;
+
+      if (r.y <= r.targetY) {
+        explodeRocket(r);
+        fwRockets.splice(i, 1);
+      }
+    }
+
+    // Update & draw particles
+    for (let i = fwParticles.length - 1; i >= 0; i--) {
+      const p = fwParticles[i];
+      p.trail.push({ x: p.x, y: p.y });
+      if (p.trail.length > 5) p.trail.shift();
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.04; // gravity
+      p.vx *= 0.985; // drag
+      p.vy *= 0.985;
+      p.life -= p.decay;
+
+      if (p.life <= 0) {
+        fwParticles.splice(i, 1);
+        continue;
+      }
+
+      // Draw trail
+      for (let t = 0; t < p.trail.length; t++) {
+        const alpha = (t / p.trail.length) * p.life * 0.4;
+        fwCtx.beginPath();
+        fwCtx.arc(p.trail[t].x, p.trail[t].y, p.size * 0.5, 0, Math.PI * 2);
+        fwCtx.fillStyle = `hsla(${p.hue}, 100%, 65%, ${alpha})`;
+        fwCtx.fill();
+      }
+
+      // Draw particle
+      fwCtx.beginPath();
+      fwCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      fwCtx.fillStyle = `hsla(${p.hue}, 100%, 70%, ${p.life})`;
+      fwCtx.shadowColor = `hsla(${p.hue}, 100%, 60%, ${p.life * 0.8})`;
+      fwCtx.shadowBlur = 8;
+      fwCtx.fill();
+      fwCtx.shadowBlur = 0;
+    }
+
+    fireworksAnimId = requestAnimationFrame(animateFireworks);
+  }
+
+  function startFireworks() {
+    if (!fireworksCanvas) return;
+    fireworksRunning = true;
+    fwParticles.length = 0;
+    fwRockets.length = 0;
+    resizeFireworksCanvas();
+
+    // Clear canvas
+    if (fwCtx) {
+      fwCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+    }
+
+    // Initial burst of rockets
+    for (let i = 0; i < 4; i++) {
+      setTimeout(launchRocket, i * 300);
+    }
+
+    // Continuous launches
+    const launchInterval = setInterval(() => {
+      if (!fireworksRunning) {
+        clearInterval(launchInterval);
+        return;
+      }
+      launchRocket();
+      if (Math.random() > 0.5) {
+        setTimeout(launchRocket, 150);
+      }
+    }, 600);
+
+    animateFireworks();
+  }
+
+  function stopFireworks() {
+    fireworksRunning = false;
+    if (fireworksAnimId) {
+      cancelAnimationFrame(fireworksAnimId);
+      fireworksAnimId = null;
+    }
+  }
+
+  initFireworksCanvas();
+
+  // ======================
+  // PAGE NAVIGATION
+  // ====================== 
   function goToPage(pageNum) {
     if (pageNum < 1 || pageNum > totalPages) return;
 
     // hide all pages
     pages.forEach(p => p.classList.remove('active'));
+
+    // Stop fireworks when leaving page 3
+    if (currentPage === 3 && pageNum !== 3) {
+      stopFireworks();
+    }
 
     currentPage = pageNum;
     const target = document.getElementById('page' + pageNum);
@@ -214,16 +447,25 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter('typeText2', 'I made something special for you, wanna see? 💝', 60);
         break;
       case 3:
-        typeWriter('typeText3', 'Happy Birthday to You! 🎂🎉', 80);
+        typeWriter('typeText3', 'Happy Birthday to you, Kulsum', 80);
+        startFireworks();
         break;
       case 4:
-        typeWriter('typeText4', 'My Wish For You 💌', 80);
+        typeWriter('typeText4', 'Cake Cutting Time 🎂', 80);
         break;
       case 5:
-        typeWriter('typeText5', 'Virtual Hug For You 🤗💕', 80);
+        // Reset greeting card to closed state every time we enter this page
+        if (greetingCard) greetingCard.classList.remove('open');
+        typeWriter('typeText5', 'A Special Greeting Card For You 💌', 80);
         break;
       case 6:
-        typeWriter('typeText6', 'Will You Be Mine? 💕', 80, () => {
+        typeWriter('typeText6', 'My Wish For You 💌', 80);
+        break;
+      case 7:
+        typeWriter('typeText7', 'Virtual Hug For You 🤗💕', 80);
+        break;
+      case 8:
+        typeWriter('typeText8', 'Will You Be Mine? 💕', 80, () => {
           // animate hearts appearing
           const hearts = document.querySelectorAll('.heart-frame');
           hearts.forEach((h, i) => {
@@ -258,6 +500,27 @@ document.addEventListener('DOMContentLoaded', () => {
   window.closeNoModal = function () {
     modalOverlay.classList.remove('visible');
   };
+
+  // ======================
+  // CAKE CUTTING
+  // ======================
+  if (cakeCutting) {
+    cakeCutting.addEventListener('click', () => {
+      if (cakeCutting.classList.contains('cut')) return;
+      cakeCutting.classList.add('cut');
+      cakeMessage.classList.add('show');
+      cakeNextBtn.classList.remove('hidden-btn');
+    });
+  }
+
+  // ======================
+  // GREETING CARD TOGGLE
+  // ======================
+  if (greetingCard) {
+    greetingCard.addEventListener('click', () => {
+      greetingCard.classList.toggle('open');
+    });
+  }
 
   // ======================
   // INITIALIZE
