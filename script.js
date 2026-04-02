@@ -601,10 +601,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show a sweet message then advance
     const card = document.querySelector('.pookie-card');
     if (card) {
-      const msg = document.createElement('div');
-      msg.innerHTML = '<h2 style="color: var(--pink-hot); font-family: var(--font-title); font-size: 2rem; margin-top: 16px;">Yay! 💖🥰💍</h2>';
-      msg.style.animation = 'cardFloat 0.5s ease';
-      card.appendChild(msg);
+      const showText = document.querySelector('#pookieConfirm');
+      showText.innerHTML = '<h2 style="color: var(--pink-hot); font-family: var(--font-title); font-size: 2rem; margin-top: 16px;">Yay! 💖🥰💍</h2>';
+      showText.style.animation = 'cardFloat 0.5s ease';
+      // showText.appendChild(msg);
       setTimeout(() => goToPage(currentPage + 1), 1500);
     } else {
       goToPage(currentPage + 1);
