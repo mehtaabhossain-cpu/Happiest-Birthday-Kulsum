@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ---------- State ----------
   let currentPage = 1;
-  const totalPages = 11;
+  const totalPages = 12;
 
   // ---------- Elements ----------
   const pages = document.querySelectorAll('.page');
@@ -496,6 +496,11 @@ document.addEventListener('DOMContentLoaded', () => {
       case 11:
         typeWriter('typeText11', 'Happy Birthday Once Again! 🎂💕', 80);
         break;
+      case 12:
+        typeWriter('typeText12', 'Happy Birthday Kulsum 🎉', 80);
+        startFinaleTimer();
+        startFireworks();
+        break;
     }
   }
 
@@ -610,6 +615,41 @@ document.addEventListener('DOMContentLoaded', () => {
       goToPage(currentPage + 1);
     }
   };
+
+  function startFinaleTimer() {
+    const birthDate = new Date("2007-04-03T00:00:00"); // YYYY-MM-DD
+    const timerEl = document.getElementById("finale-timer");
+
+    function pad(n) {
+      return n.toString().padStart(2, '0');
+    }
+
+    function updateTimer() {
+      const now = new Date();
+
+      let diff = now - birthDate;
+
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+
+      const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      const years = Math.floor(totalDays / 365);
+      const days = totalDays % 365;
+
+      timerEl.innerHTML = `
+      <div class="time-box"><span>${years}</span><small>Years</small></div>
+      <div class="time-box"><span>${days}</span><small>Days</small></div>
+      <div class="time-box"><span>${pad(hours)}</span><small>Hrs</small></div>
+      <div class="time-box"><span>${pad(minutes)}</span><small>Min</small></div>
+      <div class="time-box"><span>${pad(seconds)}</span><small>Sec</small></div>
+      `;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  }
 
   // ======================
   // INITIALIZE
