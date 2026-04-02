@@ -29,7 +29,10 @@
     <div class="cake-gif-container">
       <!-- <iframe src="https://giphy.com/embed/He4wudo59enf2" width="360" height="300" frameBorder="0" allowFullScreen>
       </iframe> -->
-      <img class="gifs" src="gifs/cake-cutting.gif" width="360" height="300" alt="gif">
+      <!-- <img class="gifs" src="gifs/cake-cutting.gif" width="360" height="300" alt="gif"> -->
+      <video class="gifs" autoplay loop muted playsinline style="width:360px; height:300px">
+        <source src="video/hii.mp4" type="video/mp4">
+      </video>
       <button class="btn skip-btn" onclick="skipCakeGif()">Continue →</button>
     </div>
   </section>
@@ -41,14 +44,15 @@
     <div class="card">
       <h1 id="typeText2" class="typewriter-text"></h1>
 
-      <!-- <div class="giphy-embed">
-        <iframe src="https://giphy.com/embed/BdAn5S0xigpO" 
+      <div class="giphy-embed">
+        <!-- <iframe src="https://giphy.com/embed/BdAn5S0xigpO" 
                 allowFullScreen>
-        </iframe>
-      </div> -->
+        </iframe> -->
+        <img class="gifs" src="video/sticker.png.09 AM.翼" alt="happy-birthday-image">
+      </div>
 
       <div class="btn-group">
-        <button class="btn btn-yes" onclick="nextPage()">Yes 💝</button>
+        <button class="btn btn-yes" onclick="nextPage()">See 💝</button>
         <!-- <button class="btn btn-no" onclick="showNoModal()">No 😅</button> -->
       </div>
     </div>
@@ -75,15 +79,47 @@
     <canvas id="fireworksCanvas" class="fireworks-bg"></canvas>
     <div class="card fireworks-card">
       <h1 id="typeText3" class="typewriter-text"></h1>
+      <img class="gifs" src="images/happy-birthday.jpeg" alt="happy-birthday-image">
       <p class="fireworks-subtext">A little surprise just for Kulsum ✨</p>
-      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="page4" class="page">
+    <div class="card photo-card">
+      <h1 class="photo-title">Pictures of You 📸</h1>
+
+      <div class="photo-grid">
+        <div class="photo-item"><img src="images/p1.jpeg" alt="" onclick="openImage(this)"></div>
+        <div class="photo-item"><img src="images/p2.jpeg" alt="" onclick="openImage(this)"></div>
+        <div class="photo-item"><img src="images/p3.jpeg" alt="" onclick="openImage(this)"></div>
+        <div class="photo-item"><img src="images/p4.jpeg" alt="" onclick="openImage(this)"></div>
+        <div class="photo-item"><img src="images/p5.jpeg" alt="" onclick="openImage(this)"></div>
+        <div class="photo-item"><img src="images/p6.jpeg" alt="" onclick="openImage(this)"></div>
+      </div>
+
+      <!-- Popup -->
+      <div id="imagePopup" class="image-popup" onclick="closeImage()">
+        <div class="popup-container" onclick="event.stopPropagation()">
+          <button class="popup-close-btn" onclick="closeImage()" aria-label="Close image">&times;</button>
+          <img id="popupImg" src="">
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      </div>
     </div>
   </section>
 
   <!-- ========================================
-       PAGE 4: Cake Cutting
+       PAGE 5: Cake Cutting
        ======================================== -->
-  <section id="page4" class="page">
+  <section id="page5" class="page">
     <div class="card">
       <h1 id="typeText4" class="typewriter-text"></h1>
       <p class="cake-instruction">Click the cake to cut it 🎂</p>
@@ -96,14 +132,17 @@
         <div class="cake-slice"></div>
       </div>
       <p id="cakeMessage" class="cake-message">Yay! Cake is cut. Make a wish! 🎉</p>
-      <button id="cakeNextBtn" class="btn btn-next hidden-btn" onclick="nextPage()">Next →</button>
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button id="cakeNextBtn" class="btn btn-next hidden-btn" onclick="nextPage()">Next →</button>
+      </div>
     </div>
   </section>
 
   <!-- ========================================
-       PAGE 5: Greeting Card
+       PAGE 6: Greeting Card
        ======================================== -->
-  <section id="page5" class="page">
+  <section id="page6" class="page">
     <div class="card">
       <h1 id="typeText5" class="typewriter-text"></h1>
       <div id="greetingCard" class="greeting-card">
@@ -112,21 +151,24 @@
         </div>
         <div class="card-inside">
           <p>
-            Dear Madam Ji, Happy Birthday!! 🎂<br>
-            I hope your day is filled with lots of love and laughs!
-            May all your birthday wishes come true. ✨
+            Dear Madam Jii Happy Birthday!! 🎂🎉
+            I hope your day is filled with lots of love and laughs! 🤭🌎
+            May all your birthday wishes come true ❤️🧿
           </p>
           <span class="greeting-hearts">💕 💖 💕</span>
         </div>
       </div>
-      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      </div>
     </div>
   </section>
 
   <!-- ========================================
-       PAGE 6: My Wish (Letter Card)
+       PAGE 7: My Wish (Letter Card)
        ======================================== -->
-  <section id="page6" class="page">
+  <section id="page7" class="page">
     <div class="card">
       <h1 id="typeText6" class="typewriter-text"></h1>
 
@@ -137,37 +179,105 @@
         <div class="corner br"></div>
 
         <p class="letter-text">
-          On this special day, I wish you all the happiness your heart can hold.
-          May your days be filled with sunshine, your nights with sweet dreams,
-          and your life with all the love you truly deserve.
+          On this special 🌹 day, I wish you all the happiness 🥹 your heart can hold. May your days be filled with
+          sunshine, your nights 😭 with sweet dreams, and your life with all the love you truly deserve ❤️
           <br><br>
-          May every moment bring you closer to your dreams,
-          and may you always know how incredibly special you are to me.
-          You make this world a more beautiful place just by being in it.
+          May every moment bring you closer to your dreams 💤, and may you always know how incredibly special you are to
+          me. 🫢 you make this world a more beautiful place 🫠 just by being in it
           <br><br>
-          Here's to another year of laughter, love, and making unforgettable memories together. 💕
+          Here's to another year of laughter, love, 🫶 and making unforgettable memories together.
         </p>
-        <p class="letter-signature">With all my love ♥</p>
+        <p class="letter-signature">- Your Pookie 🎀</p>
       </div>
 
-      <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      </div>
     </div>
   </section>
 
   <!-- ========================================
-       PAGE 7: Virtual Hug
+       PAGE 8: Virtual Hug
        ======================================== -->
-  <section id="page7" class="page">
+  <section id="page8" class="page">
     <div class="card">
       <h1 id="typeText7" class="typewriter-text"></h1>
 
       <div class="giphy-embed">
         <!-- <iframe src="https://giphy.com/embed/ZBQhoZC0nqknSviPqT" allowFullScreen>
         </iframe> -->
-        <img class="gifs" src="gifs/virtual-hug.gif" alt="gif">
+        <!-- <img class="gifs" src="gifs/virtual-hug.gif" alt="gif"> -->
+        <video class="gifs" autoplay loop muted playsinline style="width:360px; height:300px">
+          <source src="video/virtual-hug.mp4" type="video/mp4">
+        </video>
       </div>
 
-      <button class="btn btn-next" onclick="window.location.reload()">Repeat Again →</button>
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 9: Will You Be My Pookie?
+       ======================================== -->
+  <section id="page9" class="page">
+    <div class="card pookie-card">
+      <h1 id="typeText9" class="typewriter-text"></h1>
+
+      <div class="giphy-embed">
+        <video class="gifs" autoplay loop muted playsinline>
+          <source src="video/myPookie.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="btn-group pookie-btn-container" id="pookieBtnContainer">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-yes" onclick="pookieYes()">Yes 💍</button>
+        <button class="btn btn-no pookie-no" id="pookieNoBtn">No 😅</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 10: Party Time
+       ======================================== -->
+  <section id="page10" class="page">
+    <div class="card">
+      <h1 id="typeText10" class="typewriter-text"></h1>
+
+      <div class="giphy-embed">
+        <video class="gifs" autoplay loop muted playsinline>
+          <source src="video/partyTime.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="nextPage()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 11: Happy Birthday Again
+       ======================================== -->
+  <section id="page11" class="page">
+    <div class="card">
+      <h1 id="typeText11" class="typewriter-text"></h1>
+
+      <div class="giphy-embed">
+        <video class="gifs" autoplay loop muted playsinline>
+          <source src="video/birthdayAgain.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-prev" onclick="prevPage()">← Prev</button>
+        <button class="btn btn-next" onclick="window.location.reload()">Repeat Again 🔄</button>
+      </div>
     </div>
   </section>
 

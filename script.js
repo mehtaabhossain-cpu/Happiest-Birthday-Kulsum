@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ---------- State ----------
   let currentPage = 1;
-  const totalPages = 8;
+  const totalPages = 11;
 
   // ---------- Elements ----------
   const pages = document.querySelectorAll('.page');
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+
   }
 
   // ======================
@@ -192,6 +193,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Skip / advance from cake GIF ----------
   window.skipCakeGif = function () {
     goToPage(2);
+
+    // Play music on click on continue button in hii gif
+    bgMusic.play().then(() => {
+      musicPlaying = true;
+      musicToggle.classList.add('playing');
+      musicIcon.textContent = '🔊';
+    }).catch(() => {
+      // Autoplay blocked by browser – user will need to click the toggle
+    });
   };
 
   // ======================
@@ -404,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (Math.random() > 0.5) {
         setTimeout(launchRocket, 150);
       }
-    }, 600);
+    }, 400);
 
     animateFireworks();
   }
@@ -444,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerPageEffects(pageNum) {
     switch (pageNum) {
       case 2:
-        typeWriter('typeText2', 'I made something special for you, wanna see? 💝', 60);
+        typeWriter('typeText2', 'Get Ready for Something Special 🫠', 60);
         break;
       case 3:
         typeWriter('typeText3', 'Happy Birthday to you, Kulsum ❤️', 80);
@@ -456,13 +466,13 @@ document.addEventListener('DOMContentLoaded', () => {
       case 5:
         // Reset greeting card to closed state every time we enter this page
         if (greetingCard) greetingCard.classList.remove('open');
-        typeWriter('typeText5', 'A Special Greeting Card For You 💌', 80);
+        typeWriter('typeText5', 'A Special Greeting Card For You!', 80);
         break;
       case 6:
-        typeWriter('typeText6', 'My Wish For You 💌', 80);
+        typeWriter('typeText6', 'My wish for You ✍️', 80);
         break;
       case 7:
-        typeWriter('typeText7', 'Virtual Hug For You 🤗💕', 80);
+        typeWriter('typeText7', 'Virtual hug for you! 🤗🩷', 80);
         break;
       case 8:
         typeWriter('typeText8', 'Will You Be Mine? 💕', 80, () => {
@@ -476,11 +486,35 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         });
         break;
+      case 9:
+        typeWriter('typeText9', 'Will you be my pookie? 🎀', 80);
+        initPookieNoButton();
+        break;
+      case 10:
+        typeWriter('typeText10', 'Party Time! 🎉🥳', 80);
+        break;
+      case 11:
+        typeWriter('typeText11', 'Happy Birthday Once Again! 🎂💕', 80);
+        break;
     }
+  }
+
+  function openImage(img) {
+    const popup = document.getElementById("imagePopup");
+    const popupImg = document.getElementById("popupImg");
+
+    popup.classList.add("show");
+    popupImg.src = img.src;
+  }
+
+  function closeImage() {
+    document.getElementById("imagePopup").classList.remove("show");
   }
 
   // expose navigation
   window.goToPage = goToPage;
+  window.openImage = openImage;
+  window.closeImage = closeImage;
 
   window.nextPage = function () {
     goToPage(currentPage + 1);
@@ -521,6 +555,61 @@ document.addEventListener('DOMContentLoaded', () => {
       greetingCard.classList.toggle('open');
     });
   }
+
+  // ======================
+  // POOKIE DODGING NO BUTTON
+  // ======================
+  function initPookieNoButton() {
+    const noBtn = document.getElementById('pookieNoBtn');
+    const container = document.getElementById('pookieBtnContainer');
+    if (!noBtn || !container) return;
+
+    // Make container relative for absolute positioning of No button
+    container.style.position = 'relative';
+    container.style.minHeight = '80px';
+
+    function dodgeButton() {
+      const containerRect = container.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      // Random position within the card (not just the btn-group)
+      const card = container.closest('.card');
+      const cardRect = card.getBoundingClientRect();
+
+      const maxX = cardRect.width - btnWidth - 20;
+      const maxY = cardRect.height - btnHeight - 20;
+
+      const randomX = Math.floor(Math.random() * maxX) + 10;
+      const randomY = Math.floor(Math.random() * maxY) + 10;
+
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = (cardRect.left + randomX) + 'px';
+      noBtn.style.top = (cardRect.top + randomY) + 'px';
+      noBtn.style.zIndex = '50';
+      noBtn.style.transition = 'none';
+    }
+
+    noBtn.addEventListener('mouseover', dodgeButton);
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      dodgeButton();
+    });
+  }
+
+  window.pookieYes = function () {
+    // Show a sweet message then advance
+    const card = document.querySelector('.pookie-card');
+    if (card) {
+      const msg = document.createElement('div');
+      msg.innerHTML = '<h2 style="color: var(--pink-hot); font-family: var(--font-title); font-size: 2rem; margin-top: 16px;">Yay! 💖🥰💍</h2>';
+      msg.style.animation = 'cardFloat 0.5s ease';
+      card.appendChild(msg);
+      setTimeout(() => goToPage(currentPage + 1), 1500);
+    } else {
+      goToPage(currentPage + 1);
+    }
+  };
 
   // ======================
   // INITIALIZE
