@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function startFinaleTimer() {
-    const birthDate = new Date("2007-04-04T00:00:00"); // YYYY-MM-DD
+    const birthDate = new Date("2007-04-03T00:00:00"); // YYYY-MM-DD
     const timerEl = document.getElementById("finale-timer");
 
     function pad(n) {
